@@ -1,0 +1,44 @@
+package models;
+
+import java.util.*;
+
+import javax.persistence.*;
+
+import com.avaje.ebean.Model;
+
+import play.data.format.*;
+import play.data.validation.*;
+
+import com.avaje.ebean.*;
+
+/**
+ * Computer entity managed by Ebean
+ */
+@Entity 
+public class Computer extends Model {
+
+    private static final long serialVersionUID = 1L;
+
+	@Id
+    public Long id;
+    
+    @Constraints.Required
+    public String name;
+    
+    @Formats.DateTime(pattern="yyyy-MM-dd")
+    public Date introduced;
+    
+    @Formats.DateTime(pattern="yyyy-MM-dd")
+    public Date discontinued;
+    
+    @ManyToOne
+    public Company company;
+    
+   public static Find<Long,Computer> find = new Find<Long,Computer>(){};
+	public static List<Computer> listadoComputadores() {
+		// TODO Auto-generated method stub
+		return find.all();
+	}
+    
+}
+
